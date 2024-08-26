@@ -9,12 +9,15 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 import { useCreateWorkSpaceModal } from "../store/use-create-workspace-modal";
 import { useCreateWorkSpace } from "../api/use-create-workspace";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const CreateWorkSpaceModal = () => {
+  const router = useRouter()
   const [open, setOpen] = useCreateWorkSpaceModal();
   const [name, setName] = useState("")
 
@@ -22,21 +25,24 @@ export const CreateWorkSpaceModal = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setName("")
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
    e.preventDefault()
 
    mutate({name}, {
-      onSuccess(data){
-        console.log(data)
+      onSuccess(id){
+        toast.success("Workspace created!")
+        router.push(`/workspace/${id}`)
+        handleClose()
       }
    })
 
   };
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add a workspace</DialogTitle>
