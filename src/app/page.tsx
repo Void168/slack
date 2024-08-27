@@ -1,6 +1,6 @@
 "use client";
 
-import { UserButton } from "@/features/auth/components/use-button";
+import { UserButton } from "@/features/auth/components/user-button";
 import { useCreateWorkSpaceModal } from "@/features/workspace/store/use-create-workspace-modal";
 import { useGetWorkSpaces } from "@/features/workspace/api/use-get-workspaces";
 import { useEffect, useMemo } from "react";
