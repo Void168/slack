@@ -1,4 +1,4 @@
-import { auth } from "./auth";
+import { auth } from './auth'
 import { query } from './_generated/server'
 
 export const current = query ({
